@@ -11,6 +11,5 @@ export async function getArtistEvents ({artistName}: {artistName: string}) {
     }
   });
   const data: TicketmasterResponse = response.data;
-  console.log(data)
   return data;
 };

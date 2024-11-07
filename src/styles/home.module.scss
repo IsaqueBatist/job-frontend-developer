@@ -1,0 +1,14 @@
+/* styles/Component.module.scss */
+$primary-color: #007bff;
+
+.button {
+  background-color: $primary-color;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);  
+  }
+}
