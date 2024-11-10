@@ -3,46 +3,34 @@ import { getArtistEvents } from "@/services/getartirstEvents";
 import { getUplodVideosFromName } from "@/services/getUploadVideos";
 import { YouTubePlaylistItemsResponse } from "@/types/getchanelidresponse";
 import { TicketmasterResponse } from "@/types/ticketmasterresponse"; 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import styles from "@/styles/Home.module.css";
 export default function Home() {
   const [youtubeData, setYoutubeData] = useState< YouTubePlaylistItemsResponse | null>(null);
   const [ticketMasterData, setTicketMasterData] = useState<TicketmasterResponse | null>(null);
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        const response: TicketmasterResponse = await getArtistEvents({ artistName: "Coldplay" });
-        setTicketMasterData(response);
-      } catch (error) {
-        console.log("Erro ao buscar dados da API:", error);
-      }
-    }
-    getData();
-  }, []);
-
-  useEffect(() => {
-    async function getData() {
-      try{
-        const response = await getUplodVideosFromName("linkin park")
-        setYoutubeData(response)
-      }catch(error){  
-        console.log("Erro ao buscar dados da API:", error)
-      }
-    }
-    getData()
-    }, [])
-
+  async function getData(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const artistName: string = e.currentTarget.artistName.value
+    const artistData = await getArtistEvents(artistName)
+    const uploadVideoData = await getUplodVideosFromName(artistName)
+    setYoutubeData(uploadVideoData)
+    setTicketMasterData(artistData)
+  }
   return (
-    <div>
-      <h1>Buscando artistas</h1>
-      <form>
-        <input type="text" placeholder="Nome do artista" />
-        <button type="submit">Procurar</button>
+    <div className={styles.mainContainer}>      
+      <form  className={styles.form} onSubmit={getData}>
+        <input className={styles.input} list="artists" name="artistName" placeholder="Nome do artista" />
+        <datalist id="artists">
+        <option value="Chrome"></option>
+          <option value="Firefox"></option>
+          <option value="Internet Explorer"></option>
+          <option value="Opera"></option>
+          <option value="Safari"></option>
+        </datalist>
+        <button className={styles.button} type="submit">Procurar</button>
       </form>
     </div>
   );
-}
-function getChanellId(arg0: { chanellName: string; }) {
-  throw new Error("Function not implemented.");
 }
 

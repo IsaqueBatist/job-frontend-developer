@@ -3,7 +3,7 @@
 import { TicketmasterResponse } from "@/types/ticketmasterresponse";
 import { ticketAPI } from "./api";
 
-export async function getArtistEvents ({artistName}: {artistName: string}) {
+export async function getArtistEvents (artistName: string) {
   const response = await ticketAPI.get("/events", {
     params: {
       keyword: artistName,
