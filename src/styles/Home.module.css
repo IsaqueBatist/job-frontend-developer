@@ -1,1 +1,52 @@
-.mainContainer{display:flex;justify-content:center;align-items:center;height:100vh}.button{padding:10px 20px;background-color:#95f238;color:#0d0d0d;border:none;border-radius:5px;cursor:pointer;font-size:16px}.input{padding:10px;border:1px solid #ccc;border-radius:5px;width:100%}.input:focus{outline:none}.form{display:flex;flex-direction:row;justify-content:center;align-items:center}/*# sourceMappingURL=Home.module.css.map */
+@charset "UTF-8";
+ /* Color Names */
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #95F238;
+  color: #0D0D0D;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+.input:focus {
+  outline: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.youtubeContainer {
+  margin-top: 20px;
+}
+
+.videoList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.videoItem {
+  flex: 1 1 300px; /* Flexível com um tamanho mínimo */
+  max-width: 560px;
+}
+
+/*# sourceMappingURL=Home.module.css.map */

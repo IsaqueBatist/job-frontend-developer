@@ -24,9 +24,6 @@ export default function Home() {
         <datalist id="artists">
         <option value="Chrome"></option>
           <option value="Firefox"></option>
-          <option value="Internet Explorer"></option>
-          <option value="Opera"></option>
-          <option value="Safari"></option>
         </datalist>
         <button className={styles.button} type="submit">Procurar</button>
       </form>

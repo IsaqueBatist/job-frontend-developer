@@ -33,3 +33,18 @@
   justify-content: center;
   align-items: center;
 }
+
+.youtubeContainer {
+    margin-top: 20px;
+  }
+  
+  .videoList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .videoItem {
+    flex: 1 1 300px; /* Flexível com um tamanho mínimo */
+    max-width: 560px;
+  }
