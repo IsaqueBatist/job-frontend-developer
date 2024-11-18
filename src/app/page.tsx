@@ -20,11 +20,14 @@ export default function Home() {
   return (
     <div className={styles.mainContainer}>      
       <form  className={styles.form} onSubmit={getData}>
-        <input className={styles.input} list="artists" name="artistName" placeholder="Nome do artista" />
-        <datalist id="artists">
-        <option value="Chrome"></option>
-          <option value="Firefox"></option>
-        </datalist>
+        <div className={styles.nameInput}>
+          <label className={styles.label} htmlFor="iartistName">Nome do artista</label>
+          <input className={styles.input} id="iartistName" list="artists" name="artistName" placeholder="Nome do artista" />
+          <datalist id="artists">
+          <option value="Chrome"></option>
+            <option value="Firefox"></option>
+          </datalist>
+        </div>
         <button className={styles.button} type="submit">Procurar</button>
       </form>
     </div>

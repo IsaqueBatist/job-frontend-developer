@@ -5,33 +5,53 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100vw;
 }
 
 .button{
-    padding: 10px 20px;
-    background-color: variables.$lime-green;
-    color: variables.$almost-black;
+    padding: 1rem 2rem;
+    background-color: variables.$pink-bright;
+    color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: .7rem;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.6rem;
+    width: 60%;
 }
-
+.nameInput{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: center;
+}
+.label{
+  color: white;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;;
+}
 .input{
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 1rem;
+    border: .1rem solid #ccc;
+    border-radius: 1.4rem;
     width: 100%;
+    height: 4.6rem;
+    color: variables.$purple-medium;
     &:focus{
         outline: none;
+    }
+    &::placeholder{
+        color: variables.$purple-medium;
+        opacity: 50%;
     }
 }
 
 .form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  gap: 2rem;
 }
 
 .youtubeContainer {
