@@ -3,13 +3,27 @@
 import { TicketmasterResponse } from "@/types/ticketmasterresponse";
 import { ticketAPI } from "./api";
 
-export async function getArtistEvents (artistName: string) {
-  const response = await ticketAPI.get("/events", {
-    params: {
-      keyword: artistName,
-      size: 10
-    }
-  });
-  const data: TicketmasterResponse = response.data;
-  return data;
+export async function getArtistEvents(artistName: string) {
+  const artistId = await getAttractionId(artistName)
+  const events = await getEventsById(artistId)
+  console.log(events)
 };
+
+async function getAttractionId(keyword: string) {
+  const response = await ticketAPI.get("/attractions", {
+    params: {
+      keyword: keyword
+    }
+  })
+  const data = response.data
+  return data._embedded.attractions[0].id
+}
+
+async function getEventsById(id: string) {
+  const response = await ticketAPI.get("events", {
+    params: {
+      attractionId: id
+    }
+  })
+  return response.data
+}

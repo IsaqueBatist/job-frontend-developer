@@ -2,11 +2,11 @@
 import { getArtistEvents } from "@/services/getartirstEvents";
 import { getUplodVideosFromName } from "@/services/getUploadVideos";
 import { YouTubePlaylistItemsResponse } from "@/types/getchanelidresponse";
-import { TicketmasterResponse } from "@/types/ticketmasterresponse"; 
+import { TicketmasterResponse } from "@/types/ticketmasterresponse";
 import { useState } from "react";
 import styles from "@/styles/Home.module.css";
 export default function Home() {
-  const [youtubeData, setYoutubeData] = useState< YouTubePlaylistItemsResponse | null>(null);
+  const [youtubeData, setYoutubeData] = useState<YouTubePlaylistItemsResponse | null>(null);
   const [ticketMasterData, setTicketMasterData] = useState<TicketmasterResponse | null>(null);
 
   async function getData(e: React.FormEvent<HTMLFormElement>) {
@@ -18,14 +18,16 @@ export default function Home() {
     setTicketMasterData(artistData)
   }
   return (
-    <div className={styles.mainContainer}>      
-      <form  className={styles.form} onSubmit={getData}>
+    <div className={styles.mainContainer}>
+      <form className={styles.form} onSubmit={getData}>
         <input className={styles.input} list="artists" name="artistName" placeholder="Nome do artista" />
         <datalist id="artists">
-        <option value="Chrome"></option>
+          <option value="Chrome"></option>
           <option value="Firefox"></option>
         </datalist>
-        <button className={styles.button} type="submit">Procurar</button>
+        <div>
+          <button className={styles.button} type="submit">Procurar</button>
+        </div>
       </form>
     </div>
   );

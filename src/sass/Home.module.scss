@@ -1,50 +1,53 @@
 @use "_variables";
 
-.mainContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.button{
-    padding: 10px 20px;
-    background-color: variables.$lime-green;
-    color: variables.$almost-black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+.button {
+  padding: 10px 20px;
+  background-color: variables.$pink-bright;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.input{
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    &:focus{
-        outline: none;
-    }
+.input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .form {
   display: flex;
-  flex-direction: row;
+  width: 100%;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .youtubeContainer {
-    margin-top: 20px;
-  }
-  
-  .videoList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .videoItem {
-    flex: 1 1 300px; /* Flexível com um tamanho mínimo */
-    max-width: 560px;
-  }
+  margin-top: 20px;
+}
+
+.videoList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.videoItem {
+  flex: 1 1 300px;
+  /* Flexível com um tamanho mínimo */
+  max-width: 560px;
+}
