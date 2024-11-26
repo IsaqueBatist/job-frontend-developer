@@ -6,7 +6,7 @@ import { ticketAPI } from "./api";
 export async function getArtistEvents(artistName: string) {
   const artistId = await getAttractionId(artistName)
   const events = await getEventsById(artistId)
-  console.log(events)
+  return events
 };
 
 async function getAttractionId(keyword: string) {
@@ -26,4 +26,14 @@ async function getEventsById(id: string) {
     }
   })
   return response.data
+}
+
+export async function getAttractionsByName(keyword: string){
+  const response = await ticketAPI.get("/attractions", {
+    params: {
+      keyword: keyword
+    }
+  })
+  const data = response.data
+  return data
 }
