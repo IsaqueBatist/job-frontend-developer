@@ -2,6 +2,7 @@
 
 import { TicketmasterResponse } from "@/types/ticketmasterresponse";
 import { ticketAPI } from "./api";
+import { AttractionResponse } from "@/types/getAttractionByNameResponse";
 
 export async function getArtistEvents(artistName: string) {
   const artistId = await getAttractionId(artistName)
@@ -28,12 +29,12 @@ async function getEventsById(id: string) {
   return response.data
 }
 
-export async function getAttractionsByName(keyword: string){
+export async function getAttractionsByName(keyword: string): Promise<AttractionResponse>{
   const response = await ticketAPI.get("/attractions", {
     params: {
       keyword: keyword
     }
   })
   const data = response.data
-  return data
+  return data._embedded
 }

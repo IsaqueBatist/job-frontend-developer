@@ -1,6 +1,4 @@
 "use client";
-import { getAttractionsByName } from "@/services/getartirstEvents";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "@/styles/Home.module.css";
 export default function Home() {
@@ -10,7 +8,7 @@ export default function Home() {
     e.preventDefault()
     const artistName: string = e.currentTarget.artistName.value
     if(artistName){
-      router.push(`attraction/${artistName.replace(" ", "")}`)
+      router.push(`attraction/${artistName}`)
     }
   }
   return (

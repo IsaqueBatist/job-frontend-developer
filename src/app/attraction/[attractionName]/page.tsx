@@ -1,45 +1,95 @@
 "use client";
+
 import { getAttractionsByName } from "@/services/getartirstEvents";
-import styles from "@/styles/AttratcionSearched.module.css"
+import styles from "@/styles/AttratcionSearched.module.css";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { AttractionResponse } from "@/types/getAttractionByNameResponse";
 
-interface AttratcionSearchProps {
-  params: {
-    attractionName: string
+export default function AttractionSearch() {
+  const params = useParams(); // `params` é uma Promise
+  const [attractions, setAttractions] = useState<AttractionResponse>([]);
+  const [attractionName, setAttractionName] = useState<string>(null);
+
+  async function fetchAttractions(name: string) {
+    const artistData = await getAttractionsByName(name);
+    setAttractions(artistData);
   }
-}
 
-export default function AttratcionSearch({ params }: AttratcionSearchProps) {
-  const [attractions, setAttractions] = useState<any>(null)
-
-  async function getData(attractionName: string) {
-    const artistData = await getAttractionsByName(attractionName)
-    setAttractions(artistData)
-  }
-  useState(() => {
-    getData(params.attractionName)
-  })
+  useEffect(() => {
+    async function resolveParams() {
+      const resolvedParams = await params; // Resolva a Promise
+      const attractionName = String(resolvedParams?.attractionName || "")
+      setAttractionName(attractionName.replace("%20", " ")); // Salva o nome da atração no estado
+      if (attractionName) {
+        fetchAttractions(attractionName.replace("%20", " "));
+      }
+    }
+    resolveParams();
+  }, [params]);
+  if (!attractions) return <div>Loading...</div>;
   return (
     <div className={styles.mainContainer}>
-      <h2>{params.attractionName}</h2>
+      <h2>{attractionName}</h2>
       <div className={styles.attractionsFetched}>
-        <div className={styles.card}>
-          <div className={styles.cardImage}>
-            <Image src="https://s1.ticketm.net/dam/a/a1b/b15b5669-92f3-4b09-98e6-0fb3a349ea1b_RETINA_PORTRAIT_16_9.jpg" alt="attractionImage" layout="fill" objectFit="cover" />
-          </div>
-          <div className={styles.cardDescription}>
-            <h3>Chase atlantic</h3>
-            <p>rock</p>
-            <div className={styles.socialMedias}>
-              <Image src="/imagens/spotify.svg" alt="spotify" width={20} height={20} />
-              <Image src="/imagens/instagram.svg" alt="instagram" width={20} height={20} />
-              <Image src="/imagens/x.svg" className={styles.x} alt="x" width={20} height={20} />
-              <Image src="/imagens/youtube.svg" alt="youtube" width={20} height={20} />
+      {attractions?.attractions && attractions.attractions.length > 0 ? (
+        attractions.attractions.map((attraction, index) => (
+          <div className={styles.card} key={index}>
+            <div className={styles.cardImage}>
+              <Image 
+              src={attraction.images[0].url} 
+              alt="attractionImage" 
+              fill 
+              sizes="100%, 100%"
+              priority
+              />
+            </div>
+            <div className={styles.cardDescription}>
+              <h3>{attraction.name}</h3>
+              <p>{attraction.classifications?.[0]?.genre?.name}</p>
+              <div className={styles.socialMedias}>
+                {attraction?.externalLinks?.spotify?.[0]?.url ? (
+                  <a target="_blank" href={attraction?.externalLinks?.spotify?.[0]?.url || '#'}>
+                  <Image
+                    src="/imagens/spotify.svg"
+                    alt="spotify"
+                    width={20}
+                    height={20}
+                    priority
+                  />
+                </a>
+                ) : ""}
+              {attraction?.externalLinks?.instagram?.[0]?.url ? (
+              <a target="_blank" href={attraction?.externalLinks?.instagram?.[0]?.url || '#'}>
+                <Image
+                  src="/imagens/instagram.svg"
+                  alt="instagram"
+                  width={20}
+                  height={20}
+                  priority
+                />
+              </a>
+              ) : ""}
+              {attraction?.externalLinks?.youtube?.[0]?.url ? (
+              <a target="_blank" href={attraction?.externalLinks?.youtube?.[0]?.url || '#'}>
+                <Image
+                  src="/imagens/youtube.svg"
+                  alt="youtube"
+                  width={20}
+                  height={20}
+                  priority
+                />
+              </a>
+              )  : ""}
+              </div>
             </div>
           </div>
+        ))
+      ) : (
+        <p>No attractions available</p> // Exibe uma mensagem de fallback enquanto não há dados
+      )}
         </div>
-      </div>
       <div className={styles.endofpage}>
         <Image src="/imagens/headphone.svg" width={100} height={100} alt="No more results" />
         <p>Sem mais resultados para ‘Chase atlantic’</p>

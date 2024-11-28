@@ -34,14 +34,15 @@
 }
 
 .cardImage {
+  position: relative !important;
   width: 80;
   height: 55%;
   border-radius: 1rem;
   background-color: red;
   overflow: hidden;
   margin: 1rem;
-  img{
-    position: relative !important;
+  img {
+    object-fit: cover;
   }
 }
 
